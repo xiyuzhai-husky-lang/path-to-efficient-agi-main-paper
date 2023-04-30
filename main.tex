@@ -1,5 +1,5 @@
 %:
-\documentclass[9pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
 \usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
 %\geometry{landscape}                		% Activate for rotated page geometry
@@ -40,40 +40,132 @@
 \maketitle
 \tableofcontents
 
+
 \section{Introduction}
 
-This paper is the prelude of a series of papers that explore a new school of AI methodologies, which naturally incorporates with established AI methods like deep learning, and shall lead us towards \textbf{efficient} artificial general intelligence.
+(Warning: draft in progress. This is not meant for publication at a specific conference, but a central bus where different ideas are organised and described in a coherent way.)
 
-Here \textbf{efficiency} is the key because an inefficient AGI will take too long to appear or too expensive to be of important usage, although they could be helpful for entry level tasks. The meaning of efficiency is twofold:
+This paper discusses the optimal path to sample and computation efficient AGI in the era of deep learning. We first confirm theoretically the capabilities of deep learning as general purpose end-to-end machine learning methods, then argue a school of domain specific modular machine learning methods powered by a new programming language will replace deep learning as the best path to AGI.
 
-\begin{enumerate}[(i)]
-	\item Statistical efficiency. The ability to learn accurately from limited examples.
-	\item Computational efficiency. The ability to perform computation in time and within resource boundary.
-\end{enumerate}
+To give insights, we make some high level discussions.
 
-Biological intelligence, especially that of human beings, border collies, huskies, etc, although being far more efficient than deep learning, is still far from perfection. We are already beaten by computer programs in terms of memorization or rule based computation. A prediction of this note is that, a near optimal AGI implementation over the architecture of CPUs and GPUs will be far superior than biological intelligence, let alone deep learning.
+\paragraph {General Purpose vs Domain Specific.} In many fields, general purpose methods are worse than highly optimized domain specific ones. For example,
+\begin{itemize}
+	\item Matlab, Mathematica are domain specific programming languages, more effective to use than C++/python for many specific circumstances;
+	\item for specific computation tasks, specfically designed data structures are better than general purpose ones, like `SmallVec' rather than `Vec'
+	\item in mathematics, PDE domain specific techniques are more powerful than general purpose functional analysis tools.
+\end{itemize}
 
-This paper is the blueprint of how to achieve efficient AGI, including
+However, in the field of AI, general purpose methods seem to perform better. People no longer use domain specific feature engineering as a decade ago. Everything is some kind of neural network.
 
-\begin{enumerate}[(i)]
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+We believe the apparent worse performance of domain specific AI techniques is largely due to engineering challenges. On one hand, feature engineering and rule based system historically failed due to either shortage of engineering efforts or inability to exploit specific domain. On the other hand, deep learning can scale easily with more data and computation are advanced by the joint effort of countless researchers and engineers around the globe.
 
-It's going to be followed by
+\paragraph {End-to-End vs Modular} By definition, "modular" is a better property in terms of debuggability, robustness, flexibility. However, under the current deep-learning based AI frameworks, modularity is harder to achieve than end-to-end.
 
-\begin{enumerate}[(i)]
-	\item a paper on a new programming language called Husky, which satisfies the langauge requirments proposed;
-	\item a paper on image classification based on ideas in section XX;
-	\item a paper on image generation based on ideas in section XX;
-\end{enumerate}
+\paragraph {New Programming Language Design}
+We propose a new programming language design that would make AI engineering much more efficient, allowing domain specific models that perform much better than general purpose end-to-end methods.
+
+The language shall address challenges in the three major aspects:
+
+\begin{itemize}
+	\item Inference. The domain specifically optimal inference could involve computation other than matrix algebra, the language shall be able to \textbf{implement quickly system level algorithms} that are the building blocks of the overall model; furthermore, queries could be repetitive with each other in some aspects, so the language shall be able to support \textbf{incremental computation and memoization}. Lastly, we desire modular rather than end-to-end models, so the language shall support \textbf{distribute features across modules and packages}. 
+	\item Training. Gradient descent cannot be used because the proper hypothesis class will not be smoothly parametrizable in general (say, each hypothesis is a rule database, or a Rust program). So the language shall allow us to \textbf{write sophisticated domain specific (symbolic) searching algorithms for training}. We may ease the optimization difficulty by labeling some intermediate features either manually or through pretrained deep learning models, so language need to \textbf{make it trivial to integrate with manual labeling or derived label functions}. It's also possible to adapt the training process, i.e. language need to support \textbf{higher order machine learning}.
+	\item Development. In traditional programming, we largely have clear ideas about what we do beforehand and then write code to implement them; however, in domain specific AI engineering, we need to interact to know what to do. For example, we surmise that a certain feature based on a geometric function of curves will work for MNIST, only to find that it performs good overall except a few cases. We then need to narrow down to those cases and see what's happening. It might be our idea is wrong, or might be the code is buggy, or these cases are just not meant for this function. We need an \textbf{interactive, fully debuggable and visualizable IDE system that display inputs, labels, features for either the whole dataset, or a specific subset or just a single point}.
+\end{itemize}
+
+We shall give a more detailed explanation in section ??. But the full specification will be given in a separated paper.
+
+If successful, we shall be able to invent domain specific AI techniques that 
+
+\begin{itemize}
+	\item Inference is more efficient, robust and explainable. Could have language models without illusion yet 1000 times faster, runnable on local device.
+	\item Training.
+	\item Development.
+\end{itemize}
+ In the date of writing, the language is close to a new working version, including more than 90k lines of Rust code.
 
 \section{Related Works}
 
+\section{Main Results}
+
+\subsection{Neural Network Expressive Power}
 
 
-\section{Theories Based on Turing Machines}
+\section{Modular Pattern Recognition Graph}
+
+\begin{quote}
+The greatest benefit to recognizing patterns is that it gives you a pathway to power, and a ladder out of chaos. \\
+\emph{Tony Robbins}
+\end{quote}
+
+
+Here we introduce a framework to describe the computation process of pattern recognition.
+
+\subsection{Pattern Recognition}
+
+Intuitively pattern recognition is a function that is (using classical computers)
+\begin{itemize}
+	\item computable. For the very least, in polynomial time and space.
+	\item learnable. Either theoretically or empirically.
+\end{itemize}
+
+The importance of computability is needless to say. Learnability is critical for scaling, because it's much cheaper to train on machines than hiring millions of programmers to hand write everything.
+
+Examples of pattern recognitions are
+
+\begin{itemize}
+	\item Linear function. Computability is obviously. It's learnable both theoretically and empirically.
+	\item Various tasks in computer vision. Empirically shown by neural networks.
+	\item Various tasks in natural language processing. Empirically shown by neural networks.
+\end{itemize}
+
+Neural networks themselves are not viewed as "pattern recognition" because they can be hard to learn (the learning problem in neural networks is NP-complete, shown in Judd 1987, 1990).
+
+\subsection{Computation Graph}
+
+
+First, we use graph to represent a complicated function composed from simple ones. We use graph instead of DSL for the benefit of clarity.
+
+This is not much different from those graphs for neural networks.
+
+\begin{defn}[Computation Graph]
+A computation graph is a directed graph with nodes being types, and for a node $T$, with a nonempty list of incoming edges, the starting node type of which are $S_1,\cdots,S_n$, there is a function $$f: (S_1,\cdots,S_n)\to T$$.
+\end{defn}
+
+All the nodes without incoming edges are seen as inputs, and all the nodes without outgoing edges are seen as outputs.
+
+\includegraphics{computation_graph.png}
+
+\subsection{Pattern Recognition Graph}
+
+\subsection{Modular Pattern Recognition Graph}
+
+Pattern recognition graph is a specialized computational graph such that it's computable, learnable, explainable and well-suited to a specific domain.
+
+(Explainability is possible because we only allow nodes to be associated with explainably types, i.e. a type such that the value of that type has clear meaning)
+
+To avoid unnecessary confusion from over abstraction, we discuss computer vision and natural language separately, but the similarity can still be easy to see.
+
+\begin{defn}[Pattern Recognition Graph for Image Input]
+	The input is 2D rasterized image, i.e. a $M\times N$ matrix with each entry being RGB value.
+\end{defn}
+
+\subsection{Evolving Modular Pattern Recognition Graph}
+
+\subsection{Relational Database Query}
+
+
+\subsection{Type Checking}
+
+\subsection{Formal Verification and Theorem Proving}
+
+\subsection{Transpilation to Neural Networks}
+
+\subsection{Transpilation to More Efficient and Robustness Programs}
+
+\section{AGI Theories Based on Turing Machines}
+
+Pattern recognition graph is just about a single function, we will discuss how to compose them to form intelligence.
 
 \subsection{Conventions}
 
@@ -185,7 +277,9 @@ Todo: explain why it doesn't take much data to ascend.
 \subsection{$NP_0$ Preceding $ML_0$: CV and NLP}
 
 
-\section{Theories Based on Realistic Computation Models}
+\section{AGI Theories Based on Realistic Computation Models}
+
+\subsection{Locally Sensitive Hashing}
 
 
 
@@ -198,15 +292,40 @@ Todo: explain why it doesn't take much data to ascend.
 
 \subsection{Types for Machine Learning}
 
-\section{Language Requirements}
+\section{Husky Programming Language}
 
-\section{System}
+Here we give a brief description of the Husky programming language, invented to implement the above ideas.
 
-\subsection{Database}
+\subsection{Requirements for AGI-Ready Programming Language}
 
-\subsection{Debugger}
+\subsection{}
 
-\subsection{todo}
+\subsection{}
+
+Here we lay down the requirements for a programming language that can implement the efficient AGI as we described.
+
+\paragraph{Basic Requirements} We first discuss basic requirements, each of which is satisfied by at least one current programming language or is among the future design goals. However, there is no single language that satisfies all of them, a direct consequence of the fact that computer science has only been developed for 70 years.
+
+\begin{enumerate}[(i)]
+	\item purity.
+
+
+We don't want to use a programming language with which we can shoot ourselves in the feet.
+
+Logic errors is fine, but it can be detected in the debugger and handled in a controlled manner, but memory bugs and other undefined behaviors will make a large system extremely hard to track. One needs to know much more to debug a memory bug, than a logic one.
+
+	\item modularity
+	\item term level coding
+	\item system level coding
+	\item all level debugging support
+	\item 
+\end{enumerate}
+
+\paragraph{Advanced Requirements}
+
+\begin{enumerate} [(i)]
+	\item express evolving computation graph
+\end{enumerate}
 
 \section{Plans for Computer Vision}
 
