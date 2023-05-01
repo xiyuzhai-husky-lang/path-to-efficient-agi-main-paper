@@ -32,7 +32,8 @@
 \newtheorem*{lem}{Lemma}
 \usepackage{color}
 \usepackage{CJK}
-\title{Path to Efficient AGI}
+\usepackage{subfiles}
+\title{Modular Domain Specifc Approaches to Efficient AGI Powered by a New Programming Language}
 \author{Xiyu Zhai}
 \date{}							% Activate to display a given date or no date
 
@@ -40,292 +41,41 @@
 \maketitle
 \tableofcontents
 
+\abstract {
+This paper is a blueprint of a novel school of approaches to efficient AGI that is \textbf{modular} and \textbf{domain specific} and is powered by a \textbf{new programming language}. It builds upon the current success of deep learning but will outperform it in terms of sample complexity, computation efficiency (of both training and inference), explainability, robustness, accessibility to researchers and users, and ultimately the ability to evolve itself quickly and steadily.
+
+Our insights are drawn from three a priori abstractions: \textbf{pattern recognition graph} for function approximation, \textbf{NP-ML ladder} for higher order approximation and \textbf{intelligence market} for trust and resource management. We confirm theoretically the capabilities of existing neural AI approaches under these abstractions, and then give evidence to the existence of modular domain specific approaches with better properties. The only problem is that it would take forever to implement these modular domain specific approaches using existing programming langauges. As result, a new programming language is designed with great power and novelty. It's possible to implement the new approaches in the new language primarily because it allows the implementation of \textbf{modular and domain specific machine learning algorithms beyond matrix calculation} and provides \textbf{easy visualization and timeless debugging for machine learning and even intelligence systems of scale}. An outline of the language specifications is given here, but the full details will be given in a separate paper.
+
+We finishes by giving more details on the plans on specific domains, computer vision, natural languages, etc. The programming language is still in rapid development and these projects have yet to launch, so these details are subject to drastic change.
 
 \section{Introduction}
 
-(Warning: draft in progress. This is not meant for publication at a specific conference, but a central bus where different ideas are organised and described in a coherent way.)
-
-This paper discusses the optimal path to sample and computation efficient AGI in the era of deep learning. We first confirm theoretically the capabilities of deep learning as general purpose end-to-end machine learning methods, then argue a school of domain specific modular machine learning methods powered by a new programming language will replace deep learning as the best path to AGI.
-
-To give insights, we make some high level discussions.
-
-\paragraph {General Purpose vs Domain Specific.} In many fields, general purpose methods are worse than highly optimized domain specific ones. For example,
-\begin{itemize}
-	\item Matlab, Mathematica are domain specific programming languages, more effective to use than C++/python for many specific circumstances;
-	\item for specific computation tasks, specfically designed data structures are better than general purpose ones, like `SmallVec' rather than `Vec'
-	\item in mathematics, PDE domain specific techniques are more powerful than general purpose functional analysis tools.
-\end{itemize}
-
-However, in the field of AI, general purpose methods seem to perform better. People no longer use domain specific feature engineering as a decade ago. Everything is some kind of neural network.
-
-We believe the apparent worse performance of domain specific AI techniques is largely due to engineering challenges. On one hand, feature engineering and rule based system historically failed due to either shortage of engineering efforts or inability to exploit specific domain. On the other hand, deep learning can scale easily with more data and computation are advanced by the joint effort of countless researchers and engineers around the globe.
-
-\paragraph {End-to-End vs Modular} By definition, "modular" is a better property in terms of debuggability, robustness, flexibility. However, under the current deep-learning based AI frameworks, modularity is harder to achieve than end-to-end.
-
-\paragraph {New Programming Language Design}
-We propose a new programming language design that would make AI engineering much more efficient, allowing domain specific models that perform much better than general purpose end-to-end methods.
-
-The language shall address challenges in the three major aspects:
-
-\begin{itemize}
-	\item Inference. The domain specifically optimal inference could involve computation other than matrix algebra, the language shall be able to \textbf{implement quickly system level algorithms} that are the building blocks of the overall model; furthermore, queries could be repetitive with each other in some aspects, so the language shall be able to support \textbf{incremental computation and memoization}. Lastly, we desire modular rather than end-to-end models, so the language shall support \textbf{distribute features across modules and packages}. 
-	\item Training. Gradient descent cannot be used because the proper hypothesis class will not be smoothly parametrizable in general (say, each hypothesis is a rule database, or a Rust program). So the language shall allow us to \textbf{write sophisticated domain specific (symbolic) searching algorithms for training}. We may ease the optimization difficulty by labeling some intermediate features either manually or through pretrained deep learning models, so language need to \textbf{make it trivial to integrate with manual labeling or derived label functions}. It's also possible to adapt the training process, i.e. language need to support \textbf{higher order machine learning}.
-	\item Development. In traditional programming, we largely have clear ideas about what we do beforehand and then write code to implement them; however, in domain specific AI engineering, we need to interact to know what to do. For example, we surmise that a certain feature based on a geometric function of curves will work for MNIST, only to find that it performs good overall except a few cases. We then need to narrow down to those cases and see what's happening. It might be our idea is wrong, or might be the code is buggy, or these cases are just not meant for this function. We need an \textbf{interactive, fully debuggable and visualizable IDE system that display inputs, labels, features for either the whole dataset, or a specific subset or just a single point}.
-\end{itemize}
-
-We shall give a more detailed explanation in section ??. But the full specification will be given in a separated paper.
-
-If successful, we shall be able to invent domain specific AI techniques that 
-
-\begin{itemize}
-	\item Inference is more efficient, robust and explainable. Could have language models without illusion yet 1000 times faster, runnable on local device.
-	\item Training.
-	\item Development.
-\end{itemize}
- In the date of writing, the language is close to a new working version, including more than 90k lines of Rust code.
+\subfile{sections/introduction}
 
 \section{Related Works}
 
-\section{Main Results}
+\subfile{sections/related_works}
 
-\subsection{Neural Network Expressive Power}
+\section{Overview}
 
+\subfile{sections/overview}
 
-\section{Modular Pattern Recognition Graph}
+\section{ Pattern Recognition Graph}
 
-\begin{quote}
-The greatest benefit to recognizing patterns is that it gives you a pathway to power, and a ladder out of chaos. \\
-\emph{Tony Robbins}
-\end{quote}
+\subfile{sections/pattern_recognition_graph}
 
+\section{Higher Order Theories Based on Turing Machines}
 
-Here we introduce a framework to describe the computation process of pattern recognition.
 
-\subsection{Pattern Recognition}
+\subfile{sections/higher_order_turing_machine}
 
-Intuitively pattern recognition is a function that is (using classical computers)
-\begin{itemize}
-	\item computable. For the very least, in polynomial time and space.
-	\item learnable. Either theoretically or empirically.
-\end{itemize}
-
-The importance of computability is needless to say. Learnability is critical for scaling, because it's much cheaper to train on machines than hiring millions of programmers to hand write everything.
-
-Examples of pattern recognitions are
-
-\begin{itemize}
-	\item Linear function. Computability is obviously. It's learnable both theoretically and empirically.
-	\item Various tasks in computer vision. Empirically shown by neural networks.
-	\item Various tasks in natural language processing. Empirically shown by neural networks.
-\end{itemize}
-
-Neural networks themselves are not viewed as "pattern recognition" because they can be hard to learn (the learning problem in neural networks is NP-complete, shown in Judd 1987, 1990).
-
-\subsection{Computation Graph}
-
-
-First, we use graph to represent a complicated function composed from simple ones. We use graph instead of DSL for the benefit of clarity.
-
-This is not much different from those graphs for neural networks.
-
-\begin{defn}[Computation Graph]
-A computation graph is a directed graph with nodes being types, and for a node $T$, with a nonempty list of incoming edges, the starting node type of which are $S_1,\cdots,S_n$, there is a function $$f: (S_1,\cdots,S_n)\to T$$.
-\end{defn}
-
-All the nodes without incoming edges are seen as inputs, and all the nodes without outgoing edges are seen as outputs.
-
-\includegraphics{computation_graph.png}
-
-\subsection{Pattern Recognition Graph}
-
-\subsection{Modular Pattern Recognition Graph}
-
-Pattern recognition graph is a specialized computational graph such that it's computable, learnable, explainable and well-suited to a specific domain.
-
-(Explainability is possible because we only allow nodes to be associated with explainably types, i.e. a type such that the value of that type has clear meaning)
-
-To avoid unnecessary confusion from over abstraction, we discuss computer vision and natural language separately, but the similarity can still be easy to see.
-
-\begin{defn}[Pattern Recognition Graph for Image Input]
-	The input is 2D rasterized image, i.e. a $M\times N$ matrix with each entry being RGB value.
-\end{defn}
-
-\subsection{Evolving Modular Pattern Recognition Graph}
-
-\subsection{Relational Database Query}
-
-
-\subsection{Type Checking}
-
-\subsection{Formal Verification and Theorem Proving}
-
-\subsection{Transpilation to Neural Networks}
-
-\subsection{Transpilation to More Efficient and Robustness Programs}
-
-\section{AGI Theories Based on Turing Machines}
-
-Pattern recognition graph is just about a single function, we will discuss how to compose them to form intelligence.
-
-\subsection{Conventions}
-
-For the matter of succinctness, we shall in this section restrict ourselves to Turing machine level when thinking of computation. This is of course far from reality, but it helps with illuminating the high level ideas.
-
-By an $\textbf{NP}$ problem, we mean a decision problem together with the proof of that decision which can be verified in polynomial time.
-
-Everything will be finite, i.e. representable in a Turing machine.
-
-\subsection{NP Problems Arising from ML Problems}
-\begin{center}
-\begin{tikzpicture}[
-roundnode/.style={rectangle, draw=green!60, fill=green!5, very thick, minimum size=4mm},
-squarednode/.style={rectangle, draw=orange!60, fill=yellow!5, very thick, minimum size=4mm},
-]
-%Nodes
-\node[squarednode]      (ml)                              {$\text{ML}$};
-\node[roundnode]        (np)       		[right=of ml] {$\text{NP}$};
-
-%Lines
-\draw[->] (ml.east) -- (np.west);
-\end{tikzpicture}
-\end{center}
-
-We begin with the well-known fundamental (non-unique) conversion of an ML problem into an NP problem.
-
-An ML problem is about finding a function $f$ $\mathcal{X}\to \mathcal{Y}$ such that $\mathscr{L}(f):=\mathbb{E}_{(X,Y)\sim \mathcal{P}}l(f(X), Y)$ is small enough where $\mathcal{P}$ is an unknown distribution over $\mathcal{X}\times Y$ and $l:\mathcal{Y}\times \mathcal{Y} \to \mathbb{R}$ is a loss function, and we are given sampling from the unknown distribution $\mathcal{P}$ in a certain fashion (online or offline).
-
-A model is a class $\mathcal{H}$ of functions from $\mathcal{X}$ to $\mathcal{Y}$ (called Hypothesis Space). We say the model is good if one of $f\in \mathcal{H}$ will make $\mathscr{L}(f)$ small enough.
-
-Suppose that we're given enough data (the amount is still polynomial, which is possible if $\log \mathcal{H}$ is polynomial, which will be true if elements in $\mathcal{H}$ arer polynomially presentable), then $\widehat{\mathscr{L}}(f):=todo$ becomes a good approximation of $\mathscr{L}(f)$. Then whether the model is a good one becomes an NP problem, with the proof being the specific $f\in \mathcal{H}$ making $\widehat{\mathscr{L}}(f)$ small enough.
-
-More generally, we could think of meta learning. Suppose we have a family of machine learning problems indexed by S, todo
-\subsection{ML Problems Arising from NP Problems}
-\begin{center}
-\begin{tikzpicture}[
-roundnode/.style={rectangle, draw=green!60, fill=green!5, very thick, minimum size=4mm},
-squarednode/.style={rectangle, draw=orange!60, fill=yellow!5, very thick, minimum size=4mm},
-]
-%Nodes
-\node[roundnode]        (np)       		              {$\text{NP}$};
-\node[squarednode]      (ml)           [above=of np]  {$\text{ML}$};
-
-%Lines
-\draw[->] (np.north) -- (ml.south);
-\end{tikzpicture}
-\end{center}
-
-Given an NP problem, which consists of an input space $\mathcal{X}$, a certificate space $\mathcal{C}$, and a polytime verifier $v: \mathcal{X} \rightarrow \text{Bool}$, the goal is then to find an efficient implementation or approximation of $x\mapsto \exists_{c\in \mathcal{C}} v(x,c)$.
-
-Let's start with some brute force method for find certificates, denoted by $c_{\text{brute}}(x): \mathcal{X} \to \mathcal{C}$.
-
-Suppose that we are satisfied with the approximation $x\mapsto v(x,c_{\text{brute}}(x))$ and we only want to make it faster. We can collect a set of $x_i\in \mathcal{X}$, then build a dataset with $y_i=c_{brute}(x)$, then this becomes a machine learning problem.
-
-(A more appropriate setup would be to make $c_{brute}(x)$ being a small finite set of certificates, and $v(x,c_{\text{brute}}(x))$ will become $\exists c\in c_{\text{brute}}(x), v(x, c)$)
-
-Now in general we can't be satisfied with the simple approximation $x\mapsto v(x,c_{\text{brute}}(x))$, we can also use machine learning to make a better approximation.
-
-One way is to divide and conquer. Factor $\mathcal{C}$ into a disjoint union $\sqcup_{i\in \mathcal{I}} \mathcal{C}_{i}$ indexed by a not necessarily small set $\mathcal{I}$. Then
-\begin{equation}
-	f_*(x)=\exists i\in \mathcal{I}, \exists c\in \mathcal{C}_i, v(x,c).
-\end{equation}
-
-Suppose that we have a brute force method $c_{\text{brute},i}$ for each $\mathcal{C}_i$. Define
-\begin{equation}
-	g: \mathcal{X}\times \mathcal{I} \rightarrow \text{Bool}, g(x, i) = v(x, c_{\text{brute},i}(x))
-\end{equation}
-
-Now $g$ is a function we can approximate with machine learning. Let the approximation we get be $\hat{g}$, then we can simplify the problem by searching within $\mathcal{I}$ of $s$
-
-... RL is a special case.
-
-\subsection{the Ladder of NP-ML Ascension}
-``Good mathematicians see analogies. Great mathematicians see analogies between analogies.''
-
-\hfill -- Stefan Banach, as in Banach Space
-
-
-\begin{center}
-\begin{tikzpicture}[
-roundnode/.style={rectangle, draw=green!60, fill=green!5, very thick, minimum size=4mm},
-squarednode/.style={rectangle, draw=orange!60, fill=yellow!5, very thick, minimum size=4mm},
-]
-%Nodes
-\node[squarednode]      (ml0)                              {$\text{ML}_0$};
-\node[roundnode]        (np1)       		[right=of ml0] {$\text{NP}_1$};
-\node[squarednode]      (ml1)       		[above=of np1] {$\text{ML}_1$};
-\node[roundnode]        (np2)       		[right=of ml1] {$\text{NP}_2$};
-\node[squarednode]      (ml2)       		[above=of np2] {$\text{ML}_2$};
-\node[roundnode]        (np3)       		[right=of ml2] {$\text{NP}_3$};
-\node[squarednode]      (ml3)       		[above=of np3] {$\text{ML}_3$};
-
-%Lines
-\draw[->] (ml0.east) -- (np1.west);
-\draw[->] (np1.north) -- (ml1.south);
-\draw[->] (ml1.east) -- (np2.west);
-\draw[->] (np2.north) -- (ml2.south);
-\draw[->] (ml2.east) -- (np3.west);
-\draw[->] (np3.north) -- (ml3.south);
-\end{tikzpicture}
-\end{center}
-
-The typical machine learnings algorithms including deep learning, typically doesn't go up beyond $NP_1$, that's why they can't achieve AGI and needs a lot of amount of data to fake AGI in restricted scenarios.
-
-Todo: give many concrete examples. Many will come from programming and mathematics.
-
-Todo: explain why it doesn't take much data to ascend.
-
-\subsection{$NP_0$ Preceding $ML_0$: CV and NLP}
-
-
-\section{AGI Theories Based on Realistic Computation Models}
+\section{Higher Order Theories Based on Realistic Computation Models}
 
 \subsection{Locally Sensitive Hashing}
 
-
-
-\section{Type System}
-
-\subsection{Concept Level Types}
-
-
-\subsection{System Level Types}
-
-\subsection{Types for Machine Learning}
-
 \section{Husky Programming Language}
 
-Here we give a brief description of the Husky programming language, invented to implement the above ideas.
-
-\subsection{Requirements for AGI-Ready Programming Language}
-
-\subsection{}
-
-\subsection{}
-
-Here we lay down the requirements for a programming language that can implement the efficient AGI as we described.
-
-\paragraph{Basic Requirements} We first discuss basic requirements, each of which is satisfied by at least one current programming language or is among the future design goals. However, there is no single language that satisfies all of them, a direct consequence of the fact that computer science has only been developed for 70 years.
-
-\begin{enumerate}[(i)]
-	\item purity.
-
-
-We don't want to use a programming language with which we can shoot ourselves in the feet.
-
-Logic errors is fine, but it can be detected in the debugger and handled in a controlled manner, but memory bugs and other undefined behaviors will make a large system extremely hard to track. One needs to know much more to debug a memory bug, than a logic one.
-
-	\item modularity
-	\item term level coding
-	\item system level coding
-	\item all level debugging support
-	\item 
-\end{enumerate}
-
-\paragraph{Advanced Requirements}
-
-\begin{enumerate} [(i)]
-	\item express evolving computation graph
-\end{enumerate}
+\subfile{sections/husky_pl}
 
 \section{Plans for Computer Vision}
 
