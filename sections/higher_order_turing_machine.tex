@@ -30,6 +30,7 @@ We begin with the well-known fundamental (non-unique) conversion of an ML proble
 
 An ML problem is about finding a function $f$ $\mathcal{X}\to \mathcal{Y}$ such that $\mathscr{L}(f):=\mathbb{E}_{(X,Y)\sim \mathcal{P}}l(f(X), Y)$ is small enough where $\mathcal{P}$ is an unknown distribution over $\mathcal{X}\times Y$ and $l:\mathcal{Y}\times \mathcal{Y} \to \mathbb{R}$ is a loss function, and we are given sampling from the unknown distribution $\mathcal{P}$ in a certain fashion (online or offline).
 
+
 A model is a class $\mathcal{H}$ of functions from $\mathcal{X}$ to $\mathcal{Y}$ (called Hypothesis Space). We say the model is good if one of $f\in \mathcal{H}$ will make $\mathscr{L}(f)$ small enough.
 
 Suppose that we're given enough data (the amount is still polynomial, which is possible if $\log \mathcal{H}$ is polynomial, which will be true if elements in $\mathcal{H}$ arer polynomially presentable), then $\widehat{\mathscr{L}}(f):=todo$ becomes a good approximation of $\mathscr{L}(f)$. Then whether the model is a good one becomes an NP problem, with the proof being the specific $f\in \mathcal{H}$ making $\widehat{\mathscr{L}}(f)$ small enough.
@@ -104,6 +105,7 @@ squarednode/.style={rectangle, draw=orange!60, fill=yellow!5, very thick, minimu
 \end{tikzpicture}
 \end{center}
 
+(todo: elaborate this)
 The typical machine learnings algorithms including deep learning, typically doesn't go up beyond $NP_1$, that's why they can't achieve AGI and needs a lot of amount of data to fake AGI in restricted scenarios.
 
 Todo: give many concrete examples. Many will come from programming and mathematics.
